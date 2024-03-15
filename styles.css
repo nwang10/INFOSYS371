@@ -1,0 +1,81 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.logo-container img {
+  height: auto;
+  width: 50px;
+}
+
+.uwbschoolimage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+h3 {
+  font-size: 50px;
+}
+
+header {
+  background-color: red;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.filter-section,
+.majors-section,
+.interaction-section {
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.majors-section ul,
+.majors-section li {
+  list-style-type: none;
+  padding: 0;
+  margin: 1 rem;
+  font-size: 50px;
+}
+
+.interaction-section form > *,
+.majors-section h3,
+.interaction-section h3 {
+  margin-top: 10px;
+  display: block;
+}
+
+.rating label {
+  margin-right: 10px;
+}
+
+.rating input[type="radio"] {
+  margin-right: 5px;
+}
+
+form input[type="email"],
+form textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-top: 5px;
+}
+
+form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
