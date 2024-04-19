@@ -5,21 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UW Undergraduate Majors</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/8a80b728dc.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      .no-format {
+        all: unset;      /* This property resets all inherited and non-inherited properties, except the direction and unicode-bidi properties. */
+        font-size: 16px; /* Setting a default font size, you can change this to whatever you consider a 'default' size. */
+        font-family: initial; /* Resets the font to the browser's default font. */
+        text-decoration: none; /* Removes any underlines, overlines, or line-through styles. */
+        text-transform: none; /* Ensures the text is not transformed to uppercase or lowercase or capitalized. */
+        line-height: normal; /* Resets line-height to normal. */
+        letter-spacing: normal; /* Resets letter spacing to normal. */
+        color: black; /* Resets text color to black, or choose any default color you prefer. */
+    }
+
+    .hidden{
+        display: none;
+    }
+      .mandc {
+        margin-left: 40%;
+        margin-top: 1.5rem;
+        text-align: center ;
+      }
+
+      textarea {
+        min-height: 250px;
+      }
+
+    
+
+      #star_rating {
+        list-style-type: none;
+        display: inline-block;
+        margin: 10px;
+        color: white;
+        text-shadow: 2px 2px 7px grey;
+        font-size: 25px;
+      }
+      #star_rating:hover {
+        color: black;
+      }
+
+      #star_rating.active,
+      #star_rating.secondary-active {
+        color: black;
+      }
+
+      .starButton {
+        display: none;
+      }
+
+      .logo-container img {
+        width: 100%;
+        height: 60%;
+        margin: 1rem; 
+      }
+
+      .logo-container a {
+        width: 20%;
+      }
+
+      #d_box {
+        height: 5rem;
+      }
+
+      .right-div {
+    position: absolute;
+    right: 0;
+    width: 25%; /* Adjust width as needed */
+    padding: 16px;
+    box-sizing: border-box;
+    margin-top: 40%;
+    margin-right: 20px;
+    height: fit-content; 
+  }
+
+  /* #sign_up_btn{
+    text-align: center;
+  } */
+
+  
+     
+    </style>
+
+    <script src="app.js"></script>
   </head>
   <body>
     <header>
-      <div class="logo-container">
-        <img src="uwbschool.png" alt="UW Madison Business School Logo" />
-      </div>
-      <nav>
-        <ul>
-          <li><a href="majors.html">Majors</a></li>
-          <li><a href="certificates.html">Certificates</a></li>
-        </ul>
-      </nav>
-      <div class="auth-buttons">
-        <button type="button">Sign Up</button>
-        <button type="button">Sign In</button>
+      <div class="logo-container navbar-brand">
+        <!-- linking logo to homepage and image -->
+        <a href="index.html"
+          ><img src="uwbschool.png" alt="UW Madison Business School Logo" onclick="changeVisibility(['majorsPage', 'certificatesPage'], 'homePage')"
+        /></a>
+
+        <div class="mandc">
+
+          <button
+            type="button"
+            class="button is-white mr-3"
+            onclick="changeVisibility(['homePage','certificatesPage'], 'majorsPage');"
+          >
+            Majors
+          </button>
+          
+          
+          <button
+            type="button"
+            class="button is-white"
+            onclick="changeVisibility(['homePage','majorsPage'], 'certificatesPage')"
+          >
+            Certificates
+          </button>
+          
+        </div>
+        <!-- div at the top of the screen for majors and certs -->
+        <div class="navbar-end">
+          <div class="auth-buttons">
+            <!-- Button to sign up -->
+            <button id="sign_up_btn"
+              type="button"
+              class="button is-primary mt-5 mr-2"
+              onclick="openPage('signUp')"
+            >
+              Sign Up
+            </button>
+
+            <!-- Button to sign in -->
+            <button id="sign_in_btn"
+              type="button"
+              class="button is-link mt-5"
+              onclick="openPage('signIn')"
+            >
+              Sign In
+            </button>
+          </div>
+        </div>
       </div>
     </header>
     <img
@@ -27,10 +154,12 @@
       alt="uw business school image"
       class="uwbschoolimage"
     />
+    <div id = "homePage">
+    <!-- background image underneath all of the main page and three columns -->
     <div class="filters-container">
       <section class="filter-section">
         <div class="filter-block">
-          <h3>Career Paths</h3>
+          <h2 class="is-size-2 has-text-weight-semibold">Career Paths</h2>
           <form>
             <div class="form-group">
               <input type="checkbox" id="Business Analyst" name="career-path" />
@@ -82,9 +211,10 @@
             </div>
           </form>
         </div>
-
+<br>
+<br>
         <div class="filter-block">
-          <h3>Companies</h3>
+          <h2 class="is-size-2 has-text-weight-semibold">Companies</h2>
           <form>
             <div class="form-group">
               <input type="checkbox" id="Deloitte" name="company" />
@@ -128,9 +258,10 @@
             </div>
           </form>
         </div>
-
+<br>
+<br>
         <div class="filter-block">
-          <h3>Salary</h3>
+          <h2 class="is-size-2 has-text-weight-semibold">Salary</h2>
           <form>
             <div class="form-group">
               <input type="radio" id="50-55" name="salary" />
@@ -157,27 +288,169 @@
       </section>
 
       <section class="majors-section">
-        <h3>Majors</h3>
+        <h1 class="is-size-1 has-text-weight-semibold">Majors</h1>
         <ul>
-          <li>Business Administration</li>
-          <li>Accounting</li>
-          <li>Marketing</li>
-          <li>Finance</li>
-          <li>Information Systems</li>
-          <li>Actuarial Science</li>
-          <li>Entrepreneurship</li>
-          <li>Human Resource Management</li>
-          <li>Management</li>
-          <li>Supply Chain Management</li>
-          <li>Risk Management and Insurance</li>
-          <li>Operations and Technology Management</li>
-          <li>Real Estate</li>
+          <li id="major_format1" class="has-text-weight-normal">
+            Bachelor of Business Administration
+          </li>
+          <li id="major_format">Accounting</li>
+          <ul id="small_list">
+            <ul>
+              <li id="small_disc">Average Starting Salary: $69,673</li>
+              <li id="small_disc">
+                Key Employers: Deloitte, KPMG, Bakertilly, EY, Pwc, etc.
+              </li>
+              <li id="small_disc">
+                Relevant Classes: ACCT 100, ACCT 201, ACCT 301, ACCT 310, ACCT
+                302, ACCT 340, ACCT 620, ACCT 630, ACCT 621
+              </li>
+              <li id="small_disc">Reviews: (Placeholder)</li>
+            </ul>
+          </ul>
+          <li id="major_format">Marketing</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $63,911</li>
+            <li id="small_disc">
+              Key Employers: Amazon, BP, Epic Systems, Facebook, etc
+            </li>
+            <li id="small_disc">
+              Relevant Classes: MKT 300, MKT 305, MKT 310, MKT 460
+            </li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
+          <li id="major_format">Finance</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $79,132</li>
+            <li id="small_disc">
+              Key Employers: JPMorgan Chase & Co., Goldman Sachs, BMO Harris
+              Bank, Dell Technologies, etc.
+            </li>
+            <li id="small_disc">
+              Relevant Classes: FIN 205, FIN 300, FIN 305, FIN 320, FIN 325, FIN
+              330, etc.
+            </li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
+          <li id="major_format">Information Systems</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $79,256</li>
+            <li id="small_disc">
+              Key Employers: Deloitte, Epic, PwC, EY, General Mills, American
+              Family Insurance, etc.
+            </li>
+            <li id="small_disc">
+              Relevant Classes: IS 322, IS 371, IS 365, IS 424
+            </li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
+          <li id="major_format">Actuarial Science</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $74,682</li>
+            <li id="small_disc">
+              Key Employers: Deloitte, Milliman, AON, EY, UnitedHealth Group,
+              Humana, etc.
+            </li>
+            <li id="small_disc">
+              Relevant Classes: AS 301, AS 303, AS 300, AS 652, AS 653, AS 650,
+              AS 654,655, AS 651
+            </li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
+          <li id="major_format">Entrepreneurship</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $66,936</li>
+            <li id="small_disc">
+              Key Employers: Accenture, Epic, Ecolab, Google, Goldman Sachs,
+              Exact Sciences, etc.,
+            </li>
+            <li id="small_disc">Relevant Classes: N/A</li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
+          <li id="major_format">Management And Human Resources</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $61,756</li>
+            <li id="small_disc">
+              Key Employers: Colony Brands, Citadel, Deloitte, Cisco, Walt
+              Disney Co., Charles Schwab, etc.
+            </li>
+            <li id="small_disc">
+              Relevant Classes: MHR 300, MHR 305, MHR 310, MHR 365, MHR 399, MHR
+              401, MHR 403, MHR 412, MHR 422, MHR 427, MHR 628
+            </li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
+          <li id="major_format">Management</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $71,000</li>
+            <li id="small_disc">
+              Key Employers: Accenture, Capital One, Coca-Cola Co., General
+              Mills, Lands End, Pfizer, etc.
+            </li>
+            <li id="small_disc">
+              Relevant Classes: MHR 305, MHR 401, MHR 423, MHR 628
+            </li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
+          <li id="major_format">Supply Chain Management</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $72,295</li>
+            <li id="small_disc">
+              Key Employers: Kohler, Target, BP, W.W. Grainger, 3M, Uline,
+              Kohl’s, General Mills, Nestlé, Ace Hardware, etc.
+            </li>
+            <li id="small_disc">
+              Relevant Classes: MKT 300, MKT 421, OTM 421, OTM 300, MKT 423, OTM
+              423, MKT 427, OTM 427, etc.
+            </li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
+          <li id="major_format">Risk Management and Insurance</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $74,096</li>
+            <li id="small_disc">
+              Key Employers: Deloitte, Guy Carpenter, Marsh, Aon, Chubb,
+              Travelers, AIG, Munich Re, Swiss Re, American Family, CUNA Mutual,
+              etc.
+            </li>
+            <li id="small_disc">
+              Relevant Classes: RMI 300, RMI 660, RMI 645, RMI 640, RMI 655
+            </li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
+          <li id="major_format">Operations and Technology Management</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $72,007</li>
+            <li id="small_disc">
+              Key Employers: 3M, Amazon, Georgia-Pacific, Johnson Controls,
+              Kimberly-Clark, Kohler Co., Medline, Target, etc.
+            </li>
+            <li id="small_disc">
+              Relevant Classes: OTM 300, OTM 421, OTM 451, OTM 351, OTM 370, OTM
+              453
+            </li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
+          <li id="major_format">Real Estate</li>
+          <ul>
+            <li id="small_disc">Average Starting Salary: $79,269</li>
+            <li id="small_disc">
+              Key Employers: Altus Group, Jones Lang LaSalle, Cushman and
+              Wakefield, Prudential Financial, Northwestern Mutual, etc.
+            </li>
+            <li id="small_disc">
+              Relevant Classes: RE 306, RE 410, RE 411, RE 412, RE 415, RE 420,
+              RE 425, RE 530
+            </li>
+            <li id="small_disc">Reviews: (Placeholder)</li>
+          </ul>
         </ul>
       </section>
 
       <section class="interaction-section">
-        <h3>Select a Major</h3>
+        <div>
+        <h1 class="is-size-1 has-text-weight-semibold">Review a Major!</h1>
         <form>
+          <h2 class="is-size-3 has-text-weight-medium">Select a Major</h2>
           <select name="major" id="major-select">
             <option value="">--Please choose an option--</option>
             <option value="Accounting">Accounting</option>
@@ -202,48 +475,582 @@
             <option value="Real Estate">Real Estate</option>
           </select>
 
-          <h3>Rate Your Experience</h3>
-          <div class="rating">
-            <input type="radio" id="rating-1" name="rating" value="1" /><label
-              for="rating-1"
-              >1</label
-            >
-            <input type="radio" id="rating-2" name="rating" value="2" /><label
-              for="rating-2"
-              >2</label
-            >
-            <input type="radio" id="rating-3" name="rating" value="3" /><label
-              for="rating-3"
-              >3</label
-            >
-            <input type="radio" id="rating-4" name="rating" value="4" /><label
-              for="rating-4"
-              >4</label
-            >
-            <input type="radio" id="rating-5" name="rating" value="5" /><label
-              for="rating-5"
-              >5</label
-            >
-            <button type="submit">Submit</button>
-          </div>
+          <h2 class="is-size-3 has-text-weight-medium">Give a rating!</h2>
+          <form>
+            <ul>
+              <li id="star_rating">
+                <label for="rating-1"><i class="fa-solid fa-star"></i></label>
+                <input type="radio" name="ratings" id="rating-1" value="1" class="starButton"/>
+              </li>
+              <li id="star_rating">
+                <label for="rating-2"><i class="fa-solid fa-star"></i></label
+                ><input type="radio" name="ratings" id="rating-2" value="2" class="starButton"/>
+              </li>
+              <li id="star_rating">
+                <label for="rating-3"><i class="fa-solid fa-star"></i></label
+                ><input type="radio" name="ratings" id="rating-3" value="3" class="starButton" />
+              </li>
+              <li id="star_rating">
+                <label for="rating-4"><i class="fa-solid fa-star"></i></label
+                ><input type="radio" name="ratings" id="rating-4" value="4" class="starButton"/>
+              </li>
+              <li id="star_rating">
+                <label for="rating-5"><i class="fa-solid fa-star"></i></label
+                ><input type="radio" name="ratings" id="rating-5" value="5" class="starButton"/>
+              </li>
+            </ul>
 
-          <br />
-          <br />
-          <h3>Contact Us</h3>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Your email"
-          />
-          <textarea
-            id="message"
-            name="message"
-            placeholder="Your message"
-          ></textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </section>
+            <label>Name</label>
+            <input type="text" name="name" />
+            <label>Title</label>
+            <input type="text" name="title" />
+            <label>Description</label>
+            <input type="text" name="description" id="d_box" />
+            <div><input type="submit" name="" id="review_button" /></div>
+          
+          </div>
+        </section>
+       
+
+        <section class="interaction-section right-div">
+          <div>
+            <h1 class="is-size-1 has-text-weight-semibold">Your Reviews:</h1>        
+            <h1>
+              Example Review: I love Information Systems by
+              <strong>exampleusername</strong>
+            </h1>
+            <h3>Rating: 5/5 Stars</h3>
+            <p>
+              Information Systems is awesome! The content is super fun and I
+              really like having blend of technology and its business use
+              cases!</p>
+          </div>
+    
+          </section>
+        </div>
+      
+      
     </div>
+
+  </div>
+
+  <div id="majorsPage" class="hidden">
+    <h1 class="is-size-1 has-text-weight-semibold">Majors</h1>
+    <ul>
+      <li id="major_format1" class="has-text-weight-normal">
+        Bachelor of Business Administration
+      </li>
+      <li id="major_format">Accounting</li>
+      <ul id="small_list">
+        <ul>
+          <li id="small_disc">Average Starting Salary: $69,673</li>
+          <li id="small_disc">
+            Key Employers: Deloitte, KPMG, Bakertilly, EY, Pwc, etc.
+          </li>
+          <li id="small_disc">
+            Relevant Classes: ACCT 100, ACCT 201, ACCT 301, ACCT 310, ACCT
+            302, ACCT 340, ACCT 620, ACCT 630, ACCT 621
+          </li>
+          <li>Reviews:
+          </li>
+        </ul>
+      </ul>
+      <li id="major_format">Marketing</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $63,911</li>
+        <li id="small_disc">
+          Key Employers: Amazon, BP, Epic Systems, Facebook, etc
+        </li>
+        <li id="small_disc">
+          Relevant Classes: MKT 300, MKT 305, MKT 310, MKT 460
+        </li>
+      </ul>
+      <li id="major_format">Finance</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $79,132</li>
+        <li id="small_disc">
+          Key Employers: JPMorgan Chase & Co., Goldman Sachs, BMO Harris
+          Bank, Dell Technologies, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: FIN 205, FIN 300, FIN 305, FIN 320, FIN 325, FIN
+          330, etc.
+        </li>
+      </ul>
+      <li id="major_format">Information Systems</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $79,256</li>
+        <li id="small_disc">
+          Key Employers: Deloitte, Epic, PwC, EY, General Mills, American
+          Family Insurance, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: IS 322, IS 371, IS 365, IS 424
+        </li>
+      </ul>
+      <li id="major_format">Actuarial Science</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $74,682</li>
+        <li id="small_disc">
+          Key Employers: Deloitte, Milliman, AON, EY, UnitedHealth Group,
+          Humana, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: AS 301, AS 303, AS 300, AS 652, AS 653, AS 650,
+          AS 654,655, AS 651
+        </li>
+      </ul>
+      <li id="major_format">Entrepreneurship</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $66,936</li>
+        <li id="small_disc">
+          Key Employers: Accenture, Epic, Ecolab, Google, Goldman Sachs,
+          Exact Sciences, etc.,
+        </li>
+        <li id="small_disc">Relevant Classes: N/A</li>
+      </ul>
+      <li id="major_format">Management And Human Resources</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $61,756</li>
+        <li id="small_disc">
+          Key Employers: Colony Brands, Citadel, Deloitte, Cisco, Walt
+          Disney Co., Charles Schwab, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: MHR 300, MHR 305, MHR 310, MHR 365, MHR 399, MHR
+          401, MHR 403, MHR 412, MHR 422, MHR 427, MHR 628
+        </li>
+      </ul>
+      <li id="major_format">Management</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $71,000</li>
+        <li id="small_disc">
+          Key Employers: Accenture, Capital One, Coca-Cola Co., General
+          Mills, Lands End, Pfizer, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: MHR 305, MHR 401, MHR 423, MHR 628
+        </li>
+      </ul>
+      <li id="major_format">Supply Chain Management</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $72,295</li>
+        <li id="small_disc">
+          Key Employers: Kohler, Target, BP, W.W. Grainger, 3M, Uline,
+          Kohl’s, General Mills, Nestlé, Ace Hardware, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: MKT 300, MKT 421, OTM 421, OTM 300, MKT 423, OTM
+          423, MKT 427, OTM 427, etc.
+        </li>
+      </ul>
+      <li id="major_format">Risk Management and Insurance</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $74,096</li>
+        <li id="small_disc">
+          Key Employers: Deloitte, Guy Carpenter, Marsh, Aon, Chubb,
+          Travelers, AIG, Munich Re, Swiss Re, American Family, CUNA Mutual,
+          etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: RMI 300, RMI 660, RMI 645, RMI 640, RMI 655
+        </li>
+      </ul>
+      <li id="major_format">Operations and Technology Management</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $72,007</li>
+        <li id="small_disc">
+          Key Employers: 3M, Amazon, Georgia-Pacific, Johnson Controls,
+          Kimberly-Clark, Kohler Co., Medline, Target, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: OTM 300, OTM 421, OTM 451, OTM 351, OTM 370, OTM
+          453
+        </li>
+      </ul>
+      <li id="major_format">Real Estate</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $79,269</li>
+        <li id="small_disc">
+          Key Employers: Altus Group, Jones Lang LaSalle, Cushman and
+          Wakefield, Prudential Financial, Northwestern Mutual, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: RE 306, RE 410, RE 411, RE 412, RE 415, RE 420,
+          RE 425, RE 530
+        </li>
+      </ul>
+    </ul>
+  </div>
+
+  
+  <div id="majorsPage" class="hidden">
+    <h1 class="is-size-1 has-text-weight-semibold">Majors</h1>
+    <ul>
+      <li id="major_format1" class="has-text-weight-normal">
+        Bachelor of Business Administration
+      </li>
+      <li id="major_format">Accounting</li>
+      <ul id="small_list">
+        <ul>
+          <li id="small_disc">Average Starting Salary: $69,673</li>
+          <li id="small_disc">
+            Key Employers: Deloitte, KPMG, Bakertilly, EY, Pwc, etc.
+          </li>
+          <li id="small_disc">
+            Relevant Classes: ACCT 100, ACCT 201, ACCT 301, ACCT 310, ACCT
+            302, ACCT 340, ACCT 620, ACCT 630, ACCT 621
+          </li>
+          <li>Reviews:
+          </li>
+        </ul>
+      </ul>
+      <li id="major_format">Marketing</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $63,911</li>
+        <li id="small_disc">
+          Key Employers: Amazon, BP, Epic Systems, Facebook, etc
+        </li>
+        <li id="small_disc">
+          Relevant Classes: MKT 300, MKT 305, MKT 310, MKT 460
+        </li>
+        <li>Reviews:
+        </li>
+      </ul>
+      <li id="major_format">Finance</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $79,132</li>
+        <li id="small_disc">
+          Key Employers: JPMorgan Chase & Co., Goldman Sachs, BMO Harris
+          Bank, Dell Technologies, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: FIN 205, FIN 300, FIN 305, FIN 320, FIN 325, FIN
+          330, etc.
+        </li>
+        <li>Reviews:
+        </li>
+      </ul>
+      <li id="major_format">Information Systems</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $79,256</li>
+        <li id="small_disc">
+          Key Employers: Deloitte, Epic, PwC, EY, General Mills, American
+          Family Insurance, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: IS 322, IS 371, IS 365, IS 424
+        </li>
+        <li>Reviews:
+        </li>
+      </ul>
+      <li id="major_format">Actuarial Science</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $74,682</li>
+        <li id="small_disc">
+          Key Employers: Deloitte, Milliman, AON, EY, UnitedHealth Group,
+          Humana, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: AS 301, AS 303, AS 300, AS 652, AS 653, AS 650,
+          AS 654,655, AS 651
+        </li>
+        <li>Reviews:
+        </li>
+      </ul>
+      <li id="major_format">Entrepreneurship</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $66,936</li>
+        <li id="small_disc">
+          Key Employers: Accenture, Epic, Ecolab, Google, Goldman Sachs,
+          Exact Sciences, etc.,
+        </li>
+        <li id="small_disc">Relevant Classes: N/A</li>
+        <li>Reviews:
+        </li>
+      </ul>
+      <li id="major_format">Management And Human Resources</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $61,756</li>
+        <li id="small_disc">
+          Key Employers: Colony Brands, Citadel, Deloitte, Cisco, Walt
+          Disney Co., Charles Schwab, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: MHR 300, MHR 305, MHR 310, MHR 365, MHR 399, MHR
+          401, MHR 403, MHR 412, MHR 422, MHR 427, MHR 628
+        </li>
+        <li>Reviews:
+        </li>
+      </ul>
+      <li id="major_format">Management</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $71,000</li>
+        <li id="small_disc">
+          Key Employers: Accenture, Capital One, Coca-Cola Co., General
+          Mills, Lands End, Pfizer, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: MHR 305, MHR 401, MHR 423, MHR 628
+        </li>
+        <li>Reviews:
+        </li>
+      </ul>
+      <li id="major_format">Supply Chain Management</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $72,295</li>
+        <li id="small_disc">
+          Key Employers: Kohler, Target, BP, W.W. Grainger, 3M, Uline,
+          Kohl’s, General Mills, Nestlé, Ace Hardware, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: MKT 300, MKT 421, OTM 421, OTM 300, MKT 423, OTM
+          423, MKT 427, OTM 427, etc.
+        </li>
+        <li>Reviews:
+        </li>
+      </ul>
+      <li id="major_format">Risk Management and Insurance</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $74,096</li>
+        <li id="small_disc">
+          Key Employers: Deloitte, Guy Carpenter, Marsh, Aon, Chubb,
+          Travelers, AIG, Munich Re, Swiss Re, American Family, CUNA Mutual,
+          etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: RMI 300, RMI 660, RMI 645, RMI 640, RMI 655
+        </li>
+        <li>Reviews:
+        </li>
+      </ul>
+      <li id="major_format">Operations and Technology Management</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $72,007</li>
+        <li id="small_disc">
+          Key Employers: 3M, Amazon, Georgia-Pacific, Johnson Controls,
+          Kimberly-Clark, Kohler Co., Medline, Target, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: OTM 300, OTM 421, OTM 451, OTM 351, OTM 370, OTM
+          453
+        </li>
+        <li>Reviews:
+        </li>
+      </ul>
+      <li id="major_format">Real Estate</li>
+      <ul>
+        <li id="small_disc">Average Starting Salary: $79,269</li>
+        <li id="small_disc">
+          Key Employers: Altus Group, Jones Lang LaSalle, Cushman and
+          Wakefield, Prudential Financial, Northwestern Mutual, etc.
+        </li>
+        <li id="small_disc">
+          Relevant Classes: RE 306, RE 410, RE 411, RE 412, RE 415, RE 420,
+          RE 425, RE 530
+        </li>
+        <li>Reviews:
+        </li>
+      </ul>
+    </ul>
+  </div>
+
+  <div id="certificatesPage" class="hidden">
+    <h1 class="is-size-1 has-text-weight-semibold">Certificates</h1>
+    <ul>
+      <li id="major_format1">
+        Certificate in Business
+        <ul id="small_list" >
+          <li id="small_disc">18 Credits, 6 Courses</li>
+          <li id="small_disc">4 required courses + 2 business electives</li>
+          <li id="small_disc">
+            Popular Majors to Pair With the Certificate: Journalism, psychology, engineering, community & nonprofit leadership, consumer science, life sciences communication, and international studies
+          </li>
+        </ul>
+      </li>
+      <li id="major_format">Summer Certificate in Business Fundamentals
+        <ul id="small_list" >
+          <li id="small_disc">1 required course: accounting</li>
+          <li id="small_disc">+ 3 business electives: Choose from finance, marketing, operations, human resources, and risk management</li>
+          <li id="small_disc">
+            Popular Majors to Pair with the Certificate: Journalism, psychology, engineering, community & nonprofit leadership, consumer science, life sciences communication, and international studies
+          </li>
+        </ul>
+      </li>
+      <li id="major_format">Entrepreneurship Certificate
+        <ul id="small_list" >
+          <li id="small_disc">15 total credits</li>
+          <li id="small_disc">3-credit required foundational course</li>
+          <li id="small_disc">9 credits of electives: Choose 3 additional credits in advanced entrepreneurship</li>
+        </ul>
+      </li>
+      <li id="major_format">Certificate in Accounting
+        <ul id="small_list" >
+          <li id="small_disc">4 courses, 12 credits</li>
+          <li id="small_disc">1 required course (ACCT IS 301, Financial Reporting; 3 credits)</li>
+          <li id="small_disc">+3 accounting electives (any course numbered ACCT IS 302 through ACCT IS 699; 9 credits total)</li>
+          <li id="small_disc">
+            Popular Majors to Pair With the Certificate: Finance, investment and banking; risk management and insurance; real estate; information systems; operations and technology management
+          </li>
+        </ul>
+      </li>
+      <li id="major_format">International Business Certificate
+        <ul id="small_list" >
+          <li id="small_disc">13 total credits</li>
+          <li id="small_disc">International Business (3 credits); Study Abroad in International Business (1 credit)*; Global Interdisciplinary Perspective (3 credits)</li>
+          <li id="small_disc">6 additional International Business credits</li>
+          <li id="small_disc">Common job titles: Sales and Trading Analyst, Account Coordinator, Marketing Associate</li>
+        </ul>
+      </li>
+      <li id="major_format">Consulting Certificate
+        <ul id="small_list" >
+          <li id="small_disc">13 total credits</li>
+          <li id="small_disc">4 required courses: Case Interview Analysis, Project Management, Management Consulting, and Analytical Thinking</li>
+          <li id="small_disc">3 additional credits in case analysis, analytical thinking, or elective course</li>
+          <li id="small_disc">
+            Common Career Paths: Management Consulting – Generalist, Management Consulting – Specialist, Technology Consulting
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+
+
+  
+    <div id="signIn" class="modal">
+      <div class="modal-background" onclick="closePage('signIn')"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Sign In</p>
+        </header>
+        <section class="modal-card-body">
+          <!-- Sign In Form -->
+          <form>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="email"
+                  placeholder="e.g. alex@example.com"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input class="input" type="password" placeholder="********" />
+              </div>
+            </div>
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success">Sign In</button>
+          <button class="button" onclick="closePage('signIn')">Cancel</button>
+        </footer>
+      </div>
+    </div>
+
+    <div id="signUp" class="modal">
+        <div class="modal-background" onclick="closePage('signUp')"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Sign Up</p>
+          </header>
+          <section class="modal-card-body">
+            <!-- Sign Up Form -->
+            <form>
+              <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="email"
+                    placeholder="e.g. alex@example.com"
+                  />
+                </div>
+              </div>
+  
+              <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                  <input class="input" type="password" placeholder="********" />
+                </div>
+              </div>
+            </form>
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-success">Sign Up</button>
+            <button class="button" onclick="closePage('signUp')">Cancel</button>
+          </footer>
+        </div>
+      </div>
+
+    <script>
+      function openPage(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.add("is-active");
+      }
+
+      function closePage(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.remove("is-active");
+      }
+
+      function changeVisibility(id1, id2){
+            for (let i = 0; i < id1.length; i++) {
+                if(!document.getElementById(id1[i]).classList.contains('hidden')){
+                    document.getElementById(id1[i]).classList.add('hidden');
+                }
+            }
+            document.getElementById(id2).classList.remove('hidden');
+        }
+
+    </script>
   </body>
 </html>
+
+<!-- the rating form -->
+
+<!-- <div class="rating">
+  <input type="radio" id="rating-1" name="rating" value="1" /><label
+    for="rating-1"
+    >1</label>
+
+  <input type="radio" id="rating-2" name="rating" value="2" /><label
+    for="rating-2"
+    >2</label
+  >
+  <input type="radio" id="rating-3" name="rating" value="3" /><label
+    for="rating-3" 
+    >3</label
+  >
+  <input type="radio" id="rating-4" name="rating" value="4" /><label
+    for="rating-4"
+    >4</label
+  >
+  <input type="radio" id="rating-5" name="rating" value="5" /><label
+    for="rating-5"
+    >5</label
+  >
+  <button type="submit">Submit</button>
+</div> -->
+
+
+<!-- This is the contact us form -->
+<!-- </form>
+
+<br />
+<br />
+<h3>Contact Us</h3>
+
+<input
+  type="email"
+  id="email"
+  name="email"
+  placeholder="Your email"
+/>
+<div class="mt-3"><button type="submit">Submit</button></div>
+</form> -->
