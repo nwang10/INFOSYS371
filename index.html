@@ -15,6 +15,145 @@
     ></script>
 
     <style>
+      .review{
+        margin-bottom: 2em; 
+      }
+      .reviewHeader{
+        font-size:large;
+      }
+.navbar-end{
+  padding-right: 18%;
+  display: flex;
+  margin-right: 20%;
+}
+
+      body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.logo-container img {
+  height: auto;
+  width: 50px;
+}
+
+.uwbschoolimage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+h3 {
+  font-size: 50px;
+}
+
+header {
+  background-color: red;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.majors-section {
+  margin: 10px;
+  box-sizing: border-box;
+  border: black solid 3px;
+  padding: 1rem;
+  width: 35%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 915px;
+}
+.filter-section {
+  margin: 10px;
+  box-sizing: border-box;
+  border: black solid 3px;
+  padding: 1rem;
+  width: 25%;
+  height: fit-content;
+}
+
+.interaction-section {
+  margin: 10px;
+  box-sizing: border-box;
+  border: black solid 3px;
+  padding: 1rem;
+  width: 25%;
+  height: fit-content;
+}
+
+.majors-section ul,
+.majors-section li {
+  list-style-type: none;
+  padding: 0;
+  margin: 1 rem;
+  font-size: 50px;
+}
+
+.interaction-section form > *,
+.interaction-section h3 {
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+}
+
+.rating label {
+  margin-right: 10px;
+}
+
+.rating input[type="radio"] {
+  margin-right: 5px;
+}
+
+form input[type="email"],
+form textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-top: 5px;
+}
+
+form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#small_disc {
+  font-size: medium;
+  list-style-position: inside;
+  list-style-type: disc;
+}
+
+#major_format {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.majors-section h3 {
+  margin-top: 10px;
+  display: block;
+}
+#major_format1 {
+  font-size: 25px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-bottom: 1rem;
+}
+
+
       .no-format {
         all: unset;      /* This property resets all inherited and non-inherited properties, except the direction and unicode-bidi properties. */
         font-size: 16px; /* Setting a default font size, you can change this to whatever you consider a 'default' size. */
@@ -29,18 +168,15 @@
     .hidden{
         display: none;
     }
-      .mandc {
-        margin-left: 40%;
-        margin-top: 1.5rem;
-        text-align: center ;
-      }
-
+ 
       textarea {
         min-height: 250px;
       }
 
-    
-
+    #rev_maj{
+flex-direction:column ;
+    }
+/* changed  */
       #star_rating {
         list-style-type: none;
         display: inline-block;
@@ -50,7 +186,7 @@
         font-size: 25px;
       }
       #star_rating:hover {
-        color: black;
+        color: yellow;
       }
 
       #star_rating.active,
@@ -63,8 +199,8 @@
       }
 
       .logo-container img {
-        width: 100%;
-        height: 60%;
+        width: 80%;
+        height: 55%;
         margin: 1rem; 
       }
 
@@ -82,73 +218,209 @@
     width: 25%; /* Adjust width as needed */
     padding: 16px;
     box-sizing: border-box;
-    margin-top: 40%;
+    margin-top: 39.5%;
     margin-right: 20px;
     height: fit-content; 
   }
+ 
 
-  /* #sign_up_btn{
-    text-align: center;
-  } */
+  .interaction-section{
+    flex-direction: column;
+  }
 
+  .star {
+      color: #ffd700; /* Set star color */
+      cursor: pointer; /* Change cursor to pointer on hover */
+    }
+    .star:hover {
+      color: #ffbb00; /* Change star color on hover */
+    }
+    .selected {
+      color: #ffbb00; /* Set selected star color */
+    }
+
+    #user_email{
+      text-align: center; margin-right: 2REM;
+      margin-top: 20%;
+      align-items: center;
+      margin-bottom: 15%;
+      color: white;
+    }
+
+    .userEmail{
+align-items: center;
+padding: 0 auto;
+    }
   
+    .box{
+      font-size: medium;
+    }
+
+    #title{
+      font-size: large;
+        font-weight: bolder;
+    }
+    #author{
+      font-size: large;
+    }
+    #description{
+      font-size: medium;
+    }
+
+    #reviewList{
+      border: 2px solid black;
+      margin: 5px;
+      padding: 5px;
+    }
+
+    #review_rating{
+      font-size: medium;
+    } 
+
      
     </style>
-
-    <script src="app.js"></script>
   </head>
   <body>
+    <script>
+      function filterSalaries(selectedSalary) {
+  // Select all major_filter div elements
+  const filters = document.querySelectorAll('.major_filter');
+  // Loop through each filter and check its salary attribute
+  filters.forEach(filter => {
+    const salaryRange = filter.getAttribute('salary');
+    if (salaryRange === selectedSalary) {
+      filter.style.display = ''; // This shows the element
+    } else {
+      filter.style.display = 'none'; // This hides the element
+    }
+  });
+}
+
+
+function filterCompanies() {
+    const employerCheckboxes = document.querySelectorAll('input[name="company"]');
+    const majorFilters = document.querySelectorAll('.major_filter');
+
+    const checkedEmployers = Array.from(employerCheckboxes)
+                                  .filter(checkbox => checkbox.checked)
+                                  .map(checkbox => checkbox.id);
+
+    majorFilters.forEach(major => {
+      try{
+        const keyEmployers = major.querySelector('.company_filter').textContent;
+        const isMajorVisible = checkedEmployers.length === 0 || checkedEmployers.some(employer => keyEmployers.includes(employer));
+        major.style.display = isMajorVisible ? '' : 'none';
+      }
+        catch(error){
+
+        }
+    });
+}
+
+function filterJobs() {
+  try{
+    const jobCheckboxes = document.querySelectorAll('input[name="career-path"]:checked');
+    const majors = document.querySelectorAll('.major_filter');
+
+    const selectedJobs = Array.from(jobCheckboxes).map(checkbox => checkbox.id);
+
+    majors.forEach(major => {
+        const majorJobs = major.getAttribute('jobs').split(',');
+
+        const isVisible = selectedJobs.length === 0 || selectedJobs.some(job => majorJobs.includes(job));
+        major.style.display = isVisible ? '' : 'none';
+    });
+  }
+  catch(error)
+  {}
+}
+
+
+    </script>
     <header>
-      <div class="logo-container navbar-brand">
+      <!--  NAVBAR -->
+      <div class="logo-container navbar-brand ">
         <!-- linking logo to homepage and image -->
-        <a href="index.html"
+        <a class="p-2" href="index.html"
           ><img src="uwbschool.png" alt="UW Madison Business School Logo" onclick="changeVisibility(['majorsPage', 'certificatesPage'], 'homePage')"
         /></a>
 
-        <div class="mandc">
-
-          <button
+        <div class="navbar-start">
+          <div class="navbar-item"><button
             type="button"
             class="button is-white mr-3"
             onclick="changeVisibility(['homePage','certificatesPage'], 'majorsPage');"
           >
             Majors
-          </button>
+          </button></div>
           
           
-          <button
+          <div class="navbar-item"><button
             type="button"
             class="button is-white"
             onclick="changeVisibility(['homePage','majorsPage'], 'certificatesPage')"
           >
             Certificates
-          </button>
+          </button></div>
+          
           
         </div>
         <!-- div at the top of the screen for majors and certs -->
-        <div class="navbar-end">
-          <div class="auth-buttons">
+        
+          
+
+          <div class="navbar-end">
+
+            <div class="navbar-item" id="userEmail">
+              <p id="user_email"></p>
+            </div>
+
+            
             <!-- Button to sign up -->
-            <button id="sign_up_btn"
+            <div class="navbar-item">
+              <button id="sign_up_btn"
               type="button"
-              class="button is-primary mt-5 mr-2"
+              class="button signedout"
               onclick="openPage('signUp')"
             >
               Sign Up
-            </button>
+            </button></div>
 
-            <!-- Button to sign in -->
-            <button id="sign_in_btn"
+            
+              <div class="navbar-item">
+              <!-- Button to sign in -->
+              <button id="sign_in_btn"
               type="button"
-              class="button is-link mt-5"
+              class="button signedout"
               onclick="openPage('signIn')"
-            >
+              >
               Sign In
-            </button>
+              </button>
+              </div>
+            
+               <div class="navbar-item">
+                <button id="sign_out_btn"
+              type="button"
+              class="button signedin"
+              >
+              Sign Out
+              </button>
+               </div>           
+              
+            <div class="navbar-item signedin">
+              <button id="check_review_btn"
+              type="button"
+              class="button signedout"
+              >
+              Your Reviews
+              </button>
+            </div>
           </div>
-        </div>
+
+        
       </div>
     </header>
+    <div id="msg_bar" class="has-text-centered has-background-warning p-3  is-hidden"></div>
     <img
       src="uwbschoolimage.png"
       alt="uw business school image"
@@ -156,29 +428,31 @@
     />
     <div id = "homePage">
     <!-- background image underneath all of the main page and three columns -->
-    <div class="filters-container">
-      <section class="filter-section">
+
+
+    <div class="filters-container" id="entire_page">
+      <section class="filter-section" id="l_col">
         <div class="filter-block">
-          <h2 class="is-size-2 has-text-weight-semibold">Career Paths</h2>
+          <h2 class="is-size-3 has-text-weight-semibold">Career Paths</h2>
           <form>
             <div class="form-group">
-              <input type="checkbox" id="Business Analyst" name="career-path" />
+              <input type="checkbox" id="BusinessAnalyst" name="career-path" onclick="filterJobs()"/>
               <label for="Business Analyst">Business Analyst</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="Accountant" name="career-path" />
+              <input type="checkbox" id="Accountant" name="career-path" onclick="filterJobs()"/>
               <label for="Accountant">Accountant</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="Consultant" name="career-path" />
+              <input type="checkbox" id="Consultant" name="career-path" onclick="filterJobs()"/>
               <label for="Consultant">Consultant</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="MarketingAnalyst" name="career-path" />
+              <input type="checkbox" id="MarketingAnalyst" name="career-path" onclick="filterJobs()"/>
               <label for="MarketingAnalyst">Marketing Analyst</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="InvestmentBanker" name="career-path" />
+              <input type="checkbox" id="InvestmentBanker" name="career-path" onclick="filterJobs()"/>
               <label for="InvestmentBanker">Investment Banker</label>
             </div>
             <div class="form-group">
@@ -186,19 +460,20 @@
                 type="checkbox"
                 id="SalesRepresentative"
                 name="career-path"
+                onclick="filterJobs()"
               />
               <label for="SalesRepresentative">Sales Representative</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="FinancialAnalyst" name="career-path" />
+              <input type="checkbox" id="FinancialAnalyst" name="career-path" onclick="filterJobs()"/>
               <label for="FinancialAnalyst">Financial Analyst</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="Recruiter" name="career-path" />
+              <input type="checkbox" id="Recruiter" name="career-path" onclick="filterJobs()" />
               <label for="Recruiter">Recruiter</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="ProjectManager" name="career-path" />
+              <input type="checkbox" id="ProjectManager" name="career-path" onclick="filterJobs()"/>
               <label for="ProjectManager">Project Manager</label>
             </div>
             <div class="form-group">
@@ -206,6 +481,7 @@
                 type="checkbox"
                 id="OperationsManager"
                 name="career-path"
+                onclick="filterJobs()"
               />
               <label for="OperationsManager">Operations Manager</label>
             </div>
@@ -213,115 +489,119 @@
         </div>
 <br>
 <br>
+<br>
         <div class="filter-block">
-          <h2 class="is-size-2 has-text-weight-semibold">Companies</h2>
-          <form>
+          <h2 class="is-size-3 has-text-weight-semibold">Companies</h2>
+          <form id="employerFilterForm">
             <div class="form-group">
-              <input type="checkbox" id="Deloitte" name="company" />
+              <input type="checkbox" id="Deloitte" name="company" onclick="filterCompanies()"/>
               <label for="Deloitte">Deloitte</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="KPMG" name="company" />
+              <input type="checkbox" id="KPMG" name="company" onclick="filterCompanies()"/>
               <label for="KPMG">KPMG</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="EY" name="company" />
+              <input type="checkbox" id="EY" name="company" onclick="filterCompanies()"/>
               <label for="EY">EY</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="PwC" name="company" />
+              <input type="checkbox" id="PwC" name="company" onclick="filterCompanies()"/>
               <label for="PwC">PwC</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="Google" name="company" />
+              <input type="checkbox" id="Google" name="company" onclick="filterCompanies()"/>
               <label for="Google">Google</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="Amazon" name="company" />
+              <input type="checkbox" id="Amazon" name="company" onclick="filterCompanies()"/>
               <label for="Amazon">Amazon</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="Grainger" name="company" />
+              <input type="checkbox" id="Grainger" name="company" onclick="filterCompanies()"/>
               <label for="Grainger">Grainger</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="Uline" name="company" />
+              <input type="checkbox" id="Uline" name="company" onclick="filterCompanies()"/>
               <label for="Uline">Uline</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="GeneralMills" name="company" />
+              <input type="checkbox" id="GeneralMills" name="company" onclick="filterCompanies()"/>
               <label for="GeneralMills">General Mills</label>
             </div>
             <div class="form-group">
-              <input type="checkbox" id="Target" name="company" />
+              <input type="checkbox" id="Target" name="company" onclick="filterCompanies()"/>
               <label for="Target">Target</label>
             </div>
           </form>
         </div>
+
 <br>
 <br>
         <div class="filter-block">
-          <h2 class="is-size-2 has-text-weight-semibold">Salary</h2>
+          <h2 class="is-size-3 has-text-weight-semibold">Salary</h2>
           <form>
             <div class="form-group">
-              <input type="radio" id="50-55" name="salary" />
-              <label for="50-55">$50,000-$55,000</label>
-            </div>
-            <div class="form-group">
-              <input type="radio" id="55-60" name="salary" />
-              <label for="55-60">$55,000-$60,000</label>
-            </div>
-            <div class="form-group">
-              <input type="radio" id="60-65" name="salary" />
+              <input type="radio" id="60-65" name="salary" onclick="filterSalaries('60-65')" />
               <label for="60-65">$60,000-$65,000</label>
             </div>
             <div class="form-group">
-              <input type="radio" id="65-70" name="salary" />
+              <input type="radio" id="65-70" name="salary" onclick="filterSalaries('65-70')" />
               <label for="65-70">$65,000-$70,000</label>
             </div>
             <div class="form-group">
-              <input type="radio" id="70+" name="salary" />
-              <label for="70+">$70,000+</label>
+              <input type="radio" id="70-75" name="salary" onclick="filterSalaries('70-75')" />
+              <label for="70+">$70,000-$75,000</label>
+            <div class="form-group">
+              <input type="radio" id="75-80" name="salary" onclick="filterSalaries('75-80')" />
+              <label for="70+">$75,000-$80,000</label>
             </div>
           </form>
         </div>
       </section>
 
-      <section class="majors-section">
+      <section class="majors-section" id="c_col">
         <h1 class="is-size-1 has-text-weight-semibold">Majors</h1>
         <ul>
-          <li id="major_format1" class="has-text-weight-normal">
-            Bachelor of Business Administration
-          </li>
+        <li id="major_format1" class="has-text-weight-normal">
+          Bachelor of Business Administration
+        </li>
+      </ul>
+        <ul>
+          <div class="major_filter" salary="65-70" jobs="Accountant,Consultant">
           <li id="major_format">Accounting</li>
           <ul id="small_list">
             <ul>
               <li id="small_disc">Average Starting Salary: $69,673</li>
-              <li id="small_disc">
-                Key Employers: Deloitte, KPMG, Bakertilly, EY, Pwc, etc.
+              <li id="small_disc" class="company_filter">
+                Key Employers: Deloitte, KPMG, Bakertilly, EY, PwC, etc.
               </li>
               <li id="small_disc">
                 Relevant Classes: ACCT 100, ACCT 201, ACCT 301, ACCT 310, ACCT
                 302, ACCT 340, ACCT 620, ACCT 630, ACCT 621
               </li>
-              <li id="small_disc">Reviews: (Placeholder)</li>
+              <div id="reviews-Accounting" class="box"> Accounting Reviews: </div>
             </ul>
           </ul>
+          </div>
+          <div class="major_filter" salary="60-65" jobs="MarketingAnalyst,SalesRepresentative">
           <li id="major_format">Marketing</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $63,911</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: Amazon, BP, Epic Systems, Facebook, etc
             </li>
             <li id="small_disc">
               Relevant Classes: MKT 300, MKT 305, MKT 310, MKT 460
             </li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Marketing" class="box"> Marketing Reviews: </li>
           </ul>
-          <li id="major_format">Finance</li>
+          </div>
+          <div class="major_filter" salary="75-80" jobs="InvestmentBanker,FinancialAnalyst,BusinessAnalyst">
+          <li id="major_format" >Finance</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $79,132</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: JPMorgan Chase & Co., Goldman Sachs, BMO Harris
               Bank, Dell Technologies, etc.
             </li>
@@ -329,24 +609,28 @@
               Relevant Classes: FIN 205, FIN 300, FIN 305, FIN 320, FIN 325, FIN
               330, etc.
             </li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Finance" class="box"> Finance Reviews: </div>
           </ul>
+          </div>
+          <div class="major_filter" salary="75-80" jobs="BusinessAnalyst,Consultant,ProjectManager">
           <li id="major_format">Information Systems</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $79,256</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: Deloitte, Epic, PwC, EY, General Mills, American
               Family Insurance, etc.
             </li>
             <li id="small_disc">
               Relevant Classes: IS 322, IS 371, IS 365, IS 424
             </li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Information Systems" class="box">IS Reviews: </div>
           </ul>
+          </div>
+          <div class="major_filter" salary="70-75" jobs="BusinessAnalyst,FinancialAnalyst">
           <li id="major_format">Actuarial Science</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $74,682</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: Deloitte, Milliman, AON, EY, UnitedHealth Group,
               Humana, etc.
             </li>
@@ -354,22 +638,26 @@
               Relevant Classes: AS 301, AS 303, AS 300, AS 652, AS 653, AS 650,
               AS 654,655, AS 651
             </li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Actuarial Science" class="box"> Actuarial Science Reviews: </div>
           </ul>
+          </div>
+          <div class="major_filter" salary="65-70" jobs="BusinessAnalyst,SalesRepresentative">
           <li id="major_format">Entrepreneurship</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $66,936</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: Accenture, Epic, Ecolab, Google, Goldman Sachs,
               Exact Sciences, etc.,
             </li>
             <li id="small_disc">Relevant Classes: N/A</li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Entrepreneurship" class="box"> Entrepreneurship Reviews: </div>
           </ul>
+          </div>
+          <div class="major_filter" salary="60-65" jobs="Recruiter,OperationsManager">
           <li id="major_format">Management And Human Resources</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $61,756</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: Colony Brands, Citadel, Deloitte, Cisco, Walt
               Disney Co., Charles Schwab, etc.
             </li>
@@ -377,24 +665,29 @@
               Relevant Classes: MHR 300, MHR 305, MHR 310, MHR 365, MHR 399, MHR
               401, MHR 403, MHR 412, MHR 422, MHR 427, MHR 628
             </li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Human Resource Management" class="box">MHR Reviews: </div>          
           </ul>
+          </div>
+          <div class="major_filter" salary="70-75" jobs="ProjectManager,OperationsManager">
           <li id="major_format">Management</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $71,000</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: Accenture, Capital One, Coca-Cola Co., General
               Mills, Lands End, Pfizer, etc.
             </li>
             <li id="small_disc">
               Relevant Classes: MHR 305, MHR 401, MHR 423, MHR 628
             </li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Management" class="box"> Management Reviews: </div>
+
           </ul>
+          </div>
+          <div class="major_filter" salary="70-75" jobs="BusinessAnalyst,Consultant">
           <li id="major_format">Supply Chain Management</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $72,295</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: Kohler, Target, BP, W.W. Grainger, 3M, Uline,
               Kohl’s, General Mills, Nestlé, Ace Hardware, etc.
             </li>
@@ -402,12 +695,14 @@
               Relevant Classes: MKT 300, MKT 421, OTM 421, OTM 300, MKT 423, OTM
               423, MKT 427, OTM 427, etc.
             </li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Supply Chain Management" class="box"> SCM Reviews: </div>
           </ul>
+          </div>
+          <div class="major_filter" salary ="70-75" jobs="FinancialAnalyst,BusinessAnalyst">
           <li id="major_format">Risk Management and Insurance</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $74,096</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: Deloitte, Guy Carpenter, Marsh, Aon, Chubb,
               Travelers, AIG, Munich Re, Swiss Re, American Family, CUNA Mutual,
               etc.
@@ -415,12 +710,14 @@
             <li id="small_disc">
               Relevant Classes: RMI 300, RMI 660, RMI 645, RMI 640, RMI 655
             </li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Risk Management and Insurance" class="box"> RMI Reviews: </div>
           </ul>
+          </div>
+          <div class="major_filter" salary="70-75" jobs="ProjectManager,OperationsManager">
           <li id="major_format">Operations and Technology Management</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $72,007</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: 3M, Amazon, Georgia-Pacific, Johnson Controls,
               Kimberly-Clark, Kohler Co., Medline, Target, etc.
             </li>
@@ -428,12 +725,14 @@
               Relevant Classes: OTM 300, OTM 421, OTM 451, OTM 351, OTM 370, OTM
               453
             </li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Operations and Technology Management" class="box"> OTM Reviews: </div>
           </ul>
+          </div>
+          <div class="major_filter" salary="75-80" jobs="BusinessAnalyst,Consultant">
           <li id="major_format">Real Estate</li>
           <ul>
             <li id="small_disc">Average Starting Salary: $79,269</li>
-            <li id="small_disc">
+            <li id="small_disc" class="company_filter">
               Key Employers: Altus Group, Jones Lang LaSalle, Cushman and
               Wakefield, Prudential Financial, Northwestern Mutual, etc.
             </li>
@@ -441,15 +740,16 @@
               Relevant Classes: RE 306, RE 410, RE 411, RE 412, RE 415, RE 420,
               RE 425, RE 530
             </li>
-            <li id="small_disc">Reviews: (Placeholder)</li>
+            <div id="reviews-Real Estate" class="box"> Real Estate Reviews: </div>
           </ul>
+          </div>
         </ul>
       </section>
 
-      <section class="interaction-section">
+      <section class="interaction-section" id="r_col">
         <div>
         <h1 class="is-size-1 has-text-weight-semibold">Review a Major!</h1>
-        <form>
+        <form id="review_form">
           <h2 class="is-size-3 has-text-weight-medium">Select a Major</h2>
           <select name="major" id="major-select">
             <option value="">--Please choose an option--</option>
@@ -477,43 +777,26 @@
 
           <h2 class="is-size-3 has-text-weight-medium">Give a rating!</h2>
           <form>
-            <ul>
-              <li id="star_rating">
-                <label for="rating-1"><i class="fa-solid fa-star"></i></label>
-                <input type="radio" name="ratings" id="rating-1" value="1" class="starButton"/>
-              </li>
-              <li id="star_rating">
-                <label for="rating-2"><i class="fa-solid fa-star"></i></label
-                ><input type="radio" name="ratings" id="rating-2" value="2" class="starButton"/>
-              </li>
-              <li id="star_rating">
-                <label for="rating-3"><i class="fa-solid fa-star"></i></label
-                ><input type="radio" name="ratings" id="rating-3" value="3" class="starButton" />
-              </li>
-              <li id="star_rating">
-                <label for="rating-4"><i class="fa-solid fa-star"></i></label
-                ><input type="radio" name="ratings" id="rating-4" value="4" class="starButton"/>
-              </li>
-              <li id="star_rating">
-                <label for="rating-5"><i class="fa-solid fa-star"></i></label
-                ><input type="radio" name="ratings" id="rating-5" value="5" class="starButton"/>
-              </li>
-            </ul>
-
+            <div class="container" id="ratingInput">
+              <div class="stars" data-rating="0">
+              <i class="fas fa-star star" data-index="1"></i>
+              <i class="fas fa-star star" data-index="2"></i>
+              <i class="fas fa-star star" data-index="3"></i>
+              <i class="fas fa-star star" data-index="4"></i>
+              <i class="fas fa-star star" data-index="5"></i>
+            </div></div>
             <label>Name</label>
-            <input type="text" name="name" />
+            <input id="review_name" type="text" name="name" />
             <label>Title</label>
-            <input type="text" name="title" />
+            <input id="review_title" type="text" name="title" />
             <label>Description</label>
-            <input type="text" name="description" id="d_box" />
-            <div><input type="submit" name="" id="review_button" /></div>
+            <input id = "review_description" type="text" name="description" id="d_box" />
+            <div><input type="submit" name="" id="review_button" ></div>
           
           </div>
-        </section>
-       
-
-        <section class="interaction-section right-div">
-          <div>
+          <br>
+          <br>
+          <div id="rev_maj">
             <h1 class="is-size-1 has-text-weight-semibold">Your Reviews:</h1>        
             <h1>
               Example Review: I love Information Systems by
@@ -525,8 +808,10 @@
               really like having blend of technology and its business use
               cases!</p>
           </div>
-    
-          </section>
+        </section>
+       
+
+        
         </div>
       
       
@@ -540,12 +825,13 @@
       <li id="major_format1" class="has-text-weight-normal">
         Bachelor of Business Administration
       </li>
+      <div class="major_filter"
       <li id="major_format">Accounting</li>
       <ul id="small_list">
         <ul>
           <li id="small_disc">Average Starting Salary: $69,673</li>
           <li id="small_disc">
-            Key Employers: Deloitte, KPMG, Bakertilly, EY, Pwc, etc.
+            Key Employers: Deloitte, KPMG, Bakertilly, EY, PwC, etc.
           </li>
           <li id="small_disc">
             Relevant Classes: ACCT 100, ACCT 201, ACCT 301, ACCT 310, ACCT
@@ -919,21 +1205,21 @@
 
   
     <div id="signIn" class="modal">
-      <div class="modal-background" onclick="closePage('signIn')"></div>
+      <div id="signin_modalbg" class="modal-background" onclick="closePage('signIn')"></div>
       <div class="modal-card">
         <header class="modal-card-head">
           <p class="modal-card-title">Sign In</p>
         </header>
         <section class="modal-card-body">
           <!-- Sign In Form -->
-          <form>
+          <form id="signin_f">
             <div class="field">
               <label class="label">Email</label>
               <div class="control">
                 <input
                   class="input"
                   type="email"
-                  placeholder="e.g. alex@example.com"
+                  placeholder="e.g. alex@example.com" id="eaddress"
                 />
               </div>
             </div>
@@ -941,13 +1227,13 @@
             <div class="field">
               <label class="label">Password</label>
               <div class="control">
-                <input class="input" type="password" placeholder="********" />
+                <input class="input" type="password" placeholder="********" id="pword"/>
               </div>
             </div>
           </form>
         </section>
         <footer class="modal-card-foot">
-          <button class="button is-success">Sign In</button>
+          <button class="button is-success" id="signin_btn">Sign In</button>
           <button class="button" onclick="closePage('signIn')">Cancel</button>
         </footer>
       </div>
@@ -961,7 +1247,7 @@
           </header>
           <section class="modal-card-body">
             <!-- Sign Up Form -->
-            <form>
+            <form id="signup_f">
               <div class="field">
                 <label class="label">Email</label>
                 <div class="control">
@@ -969,6 +1255,7 @@
                     class="input"
                     type="email"
                     placeholder="e.g. alex@example.com"
+                    id="signup-email"
                   />
                 </div>
               </div>
@@ -976,19 +1263,50 @@
               <div class="field">
                 <label class="label">Password</label>
                 <div class="control">
-                  <input class="input" type="password" placeholder="********" />
+                  <input class="input" type="password" placeholder="********" id="signup-password"/>
                 </div>
               </div>
             </form>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success">Sign Up</button>
+            <button class="button is-success" onclick="signUpUser()">Sign Up</button>
             <button class="button" onclick="closePage('signUp')">Cancel</button>
           </footer>
         </div>
       </div>
 
+
+ <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+ <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+ <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+ <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+ <!-- Add Firebase products that you want to use -->
+ <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+
     <script>
+    const firebaseConfig = {
+  apiKey: "AIzaSyBXimjcpElu4ABUlqE3tXdgir0RHqcn9Ck",
+  authDomain: "is371-project-e6140.firebaseapp.com",
+  projectId: "is371-project-e6140",
+  storageBucket: "is371-project-e6140.appspot.com",
+  messagingSenderId: "583665560810",
+  appId: "1:583665560810:web:a825c3383f669eaa593b93"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  
+   
+   let auth = firebase.auth();
+   let db = firebase.firestore();
+
+
       function openPage(modalId) {
         const modal = document.getElementById(modalId);
         modal.classList.add("is-active");
@@ -1008,49 +1326,373 @@
             document.getElementById(id2).classList.remove('hidden');
         }
 
+
+        function signUpUser() {
+          var email = document.getElementById('signup-email').value;
+          var password = document.getElementById('signup-password').value;
+
+         
+          auth.createUserWithEmailAndPassword(email, password).then(() => {
+          // notify user that sign up was successfull
+
+          configure_message_bar(`User ${auth.currentUser.email} has been created!`);
+
+          // hide the modal
+          r_e("signIn").classList.add("is-hidden");
+          r_e("signIn").classList.remove("is-active");
+
+          // hide the message bar again in 3 seconds and clear its content
+        }).catch((error) => {
+          alert('Error creating user: '+ error.message)
+
+        });
+          // Create user with email and password
+          firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+              // Signed in 
+             
+              // Add to database or any other action
+              
+              alert('User created and signed in');
+            })
+            
+
+            .catch((error)=> {
+              alert('Email already in use or badly formatted!')
+            })
+            closePage('signIn');
+            closePage('signUp');
+            
+        }
+
+        // function addToDatabase(userId, email) {
+        //   firebase.database().ref('users/' + userId).set({
+        //     email: email
+        //   });
+        // }
+
+        function r_e(id) {
+  return document.querySelector(`#${id}`);}
+
+  const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('ratingInput');
+    // const ratingMessage = document.getElementById('ratingMessage');
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const rating = parseInt(star.getAttribute('data-index'));
+        highlightStars(rating);
+        ratingInput.value = rating; // Set the hidden input value
+        // ratingMessage.textContent = `You rated this product ${rating} star(s).`;
+      });
+
+      star.addEventListener('mouseover', () => {
+        const rating = parseInt(star.getAttribute('data-index'));
+        highlightStars(rating, true); // Highlight stars to the left on hover
+      });
+
+      star.addEventListener('mouseout', () => {
+        const currentRating = parseInt(ratingInput.value);
+        highlightStars(currentRating); // Restore original highlight after hover
+      });
+    });
+
+    function highlightStars(rating, isHover = false) {
+      stars.forEach(star => {
+        let fin_rat = 0
+        const index = parseInt(star.getAttribute('data-index'));
+        if (isHover) {
+          star.classList.toggle('hovered', index <= rating);
+        } else {
+          star.classList.toggle('selected', index <= rating);
+          fin_rat = rating
+        }
+      });
+    }
+
+    function configure_message_bar(msg) {
+  r_e("msg_bar").innerHTML = msg;
+
+  // show the message bar
+  r_e("msg_bar").classList.remove("is-hidden");
+
+  setTimeout(() => {
+    r_e("msg_bar").classList.add("is-hidden");
+    r_e("msg_bar").innerHTML = "";
+  }, 3000);
+}
+
+document.getElementById('review_form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Collect the values from the form
+  const major = document.getElementById('major-select').value;
+  const name = document.getElementById('review_name').value;
+  const title = document.getElementById('review_title').value;
+  const description = document.getElementById('review_description').value;
+  const emailUser = auth.currentUser.email;
+
+
+  
+  if(major && name && title && description && emailUser){
+    // ADD LATER 
+
+    db.collection("reviews").add({
+    user_email: emailUser,
+    major: major,
+    name: name,
+    title: title,
+    description: description,
+    rating: ratingInput.value,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp() // Adds a timestamp for sorting
+  })
+  .then(function(docRef) {
+    alert("Review submitted successfully!");
+    loadReviews(); // Call to refresh the list of reviews
+  })
+  .catch(function(error) {
+    alert('Error adding review ' + error.message)
+  });
+}else{
+  alert('Please make sure to fill out every part of the form!');
+  return;
+}
+  // Add the review to Firestore
+  
+});
+
+function loadReviews(email) {
+  db.collection("reviews").orderBy("timestamp", "desc").get().then((querySnapshot) => {
+    const reviewsContainer = document.getElementById('rev_maj');
+    reviewsContainer.innerHTML = '<h1 class="is-size-4 has-text-weight-semibold">Your Reviews:</h1>'; // Reset and prepare to display new list of reviews
+    querySnapshot.forEach((doc) => {
+      const review = doc.data()
+      const userEmail = doc.data().user_email;
+
+
+
+      const reviewsList = document.getElementById(`reviews-${review.major}`);
+        if (reviewsList) {
+          reviewsList.innerHTML += `<ul id="reviewList"> 
+            <li id="title">Title: ${review.title}</li>
+            <li id="author">Added by: ${review.name}</li>
+            <li id="review_rating"> Rating: ${review.rating} </li>
+            <li id="description">Review: <p>${review.description}</p></li>
+           </ul>`;
+        }
+        else{
+          // console.log("Choose accounting major");
+        }
+
+
+
+        if(userEmail == String(auth.currentUser.email)){
+        reviewsContainer.innerHTML += `<div class="review" id="${doc.id}">
+        <h2 class="reviewHeader has-text-weight-bold">Title: ${review.title}</h2>
+        <p><strong>Added by: </strong>${review.name}<p>
+        <p><strong>Major: </strong>${ review.major}</p>
+        <p><strong>Description: </strong>${review.description}</p>
+        <button onclick="del_doc('${doc.id}')">Delete Review</button>
+        <br>
+       </div>`;
+    }
+    });
+  });
+}
+
+function del_doc(id) {
+  // alert("Function called with ID:", id);  // This will print the ID to the console.
+  db.collection("reviews")
+    .doc(id)  // Use the ID directly without template literals.
+    .delete()
+    .then(() => {
+      alert("Document successfully deleted!"); 
+      configure_message_bar("review deleted successfully");
+      loadReviews();
+      removeReviewFromDOM(id);
+      refreshPage()
+    })
+    .catch((error) => {
+      alert("Error deleting document:", error);
+    });
+}
+
+function removeReviewFromDOM(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.parentNode.removeChild(element);
+    loadReviews()
+    refreshPage()
+  } else {
+    alert("Element not found in the DOM.");
+  }
+  
+
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadReviews(); // Load reviews when the page is ready
+});
+
+function refreshPage() {
+  location.reload()
+}
+
+
     </script>
+
+
+   
+    
+   
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+
+
+ 
+ const centerBox = r_e("c_col").innerHTML;
+
+  auth.onAuthStateChanged((user) => {
+  if (user) {
+    r_e("user_email").innerHTML = `${auth.currentUser.email}`;
+    // loadReviews(auth.currentUser.email);
+
+    configure_nav_bar(auth.currentUser.email);
+
+    r_e("l_col").classList.remove("is-hidden");
+    r_e("r_col").classList.remove("is-hidden");
+    r_e("c_col").innerHTML = centerBox;
+  } else {
+    // alert("no current user");
+    r_e("user_email").innerHTML = "";
+    loadReviews();
+    configure_nav_bar();
+    // hide the left and right columns
+
+    r_e("l_col").classList.add("is-hidden");
+    r_e("r_col").classList.add("is-hidden");
+    r_e("c_col").innerHTML =
+      "Please Sign up or Sign in to get access to full website";
+  }
+});
+
+
+r_e("signin_btn").addEventListener("click", (e) => {
+  e.preventDefault();
+  // alert("a");
+
+  // find the email and password from the form
+  let email = r_e("eaddress").value;
+  let pass = r_e("pword").value;
+  // console.log(email, pass);
+
+  auth.signInWithEmailAndPassword(email, pass).then((user) => {
+    // reset the sign in form
+    configure_message_bar("You are now signed in!");
+
+    r_e("signIn").classList.remove("is-active");
+
+    // r_e("signinbtn").classList.add("is-hidden");
+  });
+});
+
+
+
+//   })
+  
+// }
+
+function configure_message_bar(msg) {
+  r_e("msg_bar").innerHTML = msg;
+
+  // show the message bar
+  r_e("msg_bar").classList.remove("is-hidden");
+
+  setTimeout(() => {
+    r_e("msg_bar").classList.add("is-hidden");
+    r_e("msg_bar").innerHTML = "";
+  }, 3000);
+}
+
+function configure_nav_bar(email) {
+  let signedinlinks = document.querySelectorAll(".signedin");
+  let signedoutlinks = document.querySelectorAll(".signedout");
+
+  // console.log(signedinlinks, signedoutlinks);
+  if (email) {
+    // show all elements with class signedin
+    // AND hide all the elements with class signedout
+
+    signedinlinks.forEach((link) => {
+      link.classList.remove("is-hidden");
+    });
+
+    signedoutlinks.forEach((link) => {
+      link.classList.add("is-hidden");
+    });
+  } else {
+    // hide all elements with class signedin
+    // AND show all the elements with class signedout
+
+    signedinlinks.forEach((link) => {
+      link.classList.add("is-hidden");
+    });
+
+    signedoutlinks.forEach((link) => {
+      link.classList.remove("is-hidden");
+    });
+  }
+}
+
+function signin() {r_e("signin_f").addEventListener("submit", (e) => {
+  e.preventDefault();
+  // alert("a");
+
+  // find the email and password from the form
+  let email = r_e("email_").value;
+  let pass = r_e("password_").value;
+  // console.log(email, pass);
+
+  auth.signInWithEmailAndPassword(email, pass).then((user) => {
+    // reset the sign in form
+    configure_message_bar("You are now signed in!");
+
+    r_e("signIn").classList.remove("is-active");
+
+    // r_e("signinbtn").classList.add("is-hidden");
+
+    window.location.reload();
+  });
+});}
+
+
+r_e("sign_out_btn").addEventListener("click", () => {
+  auth.signOut().then(() => {
+    // display a message on the message bar indicating user signed out
+    configure_message_bar(`You are now signed out!`);
+  });
+});
+
+
+
+
+function refreshPage() {
+  location.reload()
+}
+
+
+
+
+</script>
   </body>
 </html>
 
-<!-- the rating form -->
-
-<!-- <div class="rating">
-  <input type="radio" id="rating-1" name="rating" value="1" /><label
-    for="rating-1"
-    >1</label>
-
-  <input type="radio" id="rating-2" name="rating" value="2" /><label
-    for="rating-2"
-    >2</label
-  >
-  <input type="radio" id="rating-3" name="rating" value="3" /><label
-    for="rating-3" 
-    >3</label
-  >
-  <input type="radio" id="rating-4" name="rating" value="4" /><label
-    for="rating-4"
-    >4</label
-  >
-  <input type="radio" id="rating-5" name="rating" value="5" /><label
-    for="rating-5"
-    >5</label
-  >
-  <button type="submit">Submit</button>
-</div> -->
 
 
-<!-- This is the contact us form -->
-<!-- </form>
-
-<br />
-<br />
-<h3>Contact Us</h3>
-
-<input
-  type="email"
-  id="email"
-  name="email"
-  placeholder="Your email"
-/>
-<div class="mt-3"><button type="submit">Submit</button></div>
-</form> -->
